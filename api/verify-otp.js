@@ -41,12 +41,12 @@ export default async function handler(req, res) {
     // ===============================
     // VERIFY OTP WITH TWILIO
     // ===============================
-    const verificationCheck = await client.verify.v2
-      .services(process.env.TWILIO_VERIFY_SERVICE_SID)
-      .verificationChecks.create({
-        to: phone,
-        code: code
-      });
+   const verificationCheck = await client.verify.v2
+  .services(process.env.TWILIO_VERIFY_SERVICE_SID)
+  .verificationChecks.create({
+    to: phone.startsWith("+") ? phone : `+${phone}`,
+    code: code
+  });
 
     if (verificationCheck.status !== "approved") {
       return res.status(400).json({ error: "Invalid OTP" });
