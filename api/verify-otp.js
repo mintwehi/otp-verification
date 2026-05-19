@@ -73,11 +73,11 @@ export default async function handler(req, res) {
     });
 
   } catch (err) {
-    console.error("VERIFY OTP ERROR:", err);
+  console.error("TWILIO ERROR:", err);
 
-    return res.status(500).json({
-      error: "Server error",
-      details: err.message
-    });
-  }
+  return res.status(500).json({
+    error: "Server error",
+    details: err.message
+  });
+}
 }
